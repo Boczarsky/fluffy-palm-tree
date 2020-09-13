@@ -3,7 +3,7 @@ services:
   app:
     container_name: movie-app
     restart: always
-    build: .
+    build: ./backend
     ports:
       - '3000:3000'
     links:
