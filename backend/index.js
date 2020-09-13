@@ -1,8 +1,11 @@
-const port = 3000;
-const dbURI = 'mongodb://mongo:27017/movies-app';
+const port = 80;
+// const dbURI = 'mongodb://mongo:27017/movies-app';
+const dbURI = 'mongodb://192.168.0.181:27017/movies-app';
 
 const express = require('express');
 const app = express();
+
+const Movie = require('./models/movie');
 
 const mongoose = require('mongoose');
 mongoose.connect(dbURI, { useNewUrlParser: true })
@@ -16,5 +19,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
   });
 
 app.get('/', (req, res) => {
-  res.send('HENLO');
+  Movie.find((err, result) => {
+    res.json(result);
+  })
 })
