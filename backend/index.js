@@ -1,4 +1,4 @@
-const port = 80;
+const port = 3000;
 const dbURI = 'mongodb://mongo:27017/movies-app';
 
 const express = require('express');
