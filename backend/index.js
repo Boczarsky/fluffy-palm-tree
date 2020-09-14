@@ -1,6 +1,5 @@
 const port = 80;
-// const dbURI = 'mongodb://mongo:27017/movies-app';
-const dbURI = 'mongodb://192.168.0.181:27017/movies-app';
+const dbURI = 'mongodb://mongo:27017/movies-app';
 
 const express = require('express');
 const app = express();
@@ -18,8 +17,34 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
     console.error(`Cannot connect to database by ${dbURI}`);
   });
 
-app.get('/', (req, res) => {
-  Movie.find((err, result) => {
-    res.json(result);
-  })
+app.get('/api/movies', (req, res) => {
+  const { search, id } = req.query;
+  if (search) {
+    Movie.find({ title: { $regex: `.*${search}.*` } }, '_id title')
+      .sort({ title: 1 })
+      .limit(5)
+      .exec()
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      })
+  } else if (id) {
+    Movie.findById(id).exec()
+      .then((result) => {
+        if (result) {
+          res.json(result);
+        } else {
+          res.sendStatus(404);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(400);
+  }
 })
