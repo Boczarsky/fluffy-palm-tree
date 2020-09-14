@@ -1,5 +1,6 @@
 const port = 3000;
-const dbURI = 'mongodb://mongo:27017/movies-app';
+// const dbURI = 'mongodb://mongo:27017/movies-app';
+const dbURI = 'mongodb://192.168.0.181:27017/movies-app';
 
 const express = require('express');
 const app = express();
@@ -20,7 +21,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
 app.get('/api/movies', (req, res) => {
   const { search, id } = req.query;
   if (search) {
-    Movie.find({ title: { $regex: `.*${search}.*` } }, '_id title')
+    Movie.find({ title: { $regex: `.*${search}.*`, $options: 'i' } }, '_id title')
       .sort({ title: 1 })
       .limit(5)
       .exec()
