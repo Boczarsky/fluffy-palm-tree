@@ -3,7 +3,7 @@
 ## Startup instructions
 
 1. Install docker and docker-compose
-2. Open console in main directory (where is **docker-compose.yaml**) and type docker-compose up
+2. Open console in main directory (where is **docker-compose.yaml**) and type `docker-compose up`
 
 ## Troubleshooting
 
