@@ -8,3 +8,4 @@
 ## Troubleshooting
 
 If application (frontend) is not running on localhost create .env file end add API_ROOT={host}/api
+To populate database with data run populate.js file from /backend (ensure you entered correct dbURI)
