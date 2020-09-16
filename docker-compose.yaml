@@ -13,3 +13,8 @@ services:
     image: mongo
     ports:
       - '27017:27017'
+  nginx:
+    container_name: nginx
+    build: ./frontend
+    ports:
+      - '80:80'

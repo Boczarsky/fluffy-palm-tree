@@ -1,9 +1,11 @@
 const port = 3000;
-// const dbURI = 'mongodb://mongo:27017/movies-app';
-const dbURI = 'mongodb://192.168.0.181:27017/movies-app';
+const dbURI = 'mongodb://mongo:27017/movies-app';
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
+app.use(cors())
 
 const Movie = require('./models/movie');
 
